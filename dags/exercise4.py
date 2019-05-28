@@ -14,8 +14,9 @@ dag = DAG(
 with dag:
     psql_to_gcs = PostgresToGoogleCloudStorageOperator(
         sql="""
-            SELECT * FROM land_registry_price_paid_uk WHERE transfer_date = '{{ ds }}'
+            SELECT * FROM land_registry_price_paid_uk WHERE transfer_date = :ds
             """,
+        parameters={'ds': '{{ ds }}'},
         bucket='europe-west1-training-airfl-097953ee-bucket',
         filename='data/{{ ds }}/properties_{}.json',
         postgres_conn_id='postgres_gdd',
