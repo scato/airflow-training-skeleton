@@ -3,6 +3,7 @@ from airflow import DAG
 from airflow.operators.bash_operator import BashOperator
 from airflow.operators.dummy_operator import DummyOperator
 from airflow.operators.python_operator import PythonOperator, BranchPythonOperator
+from airflow.utils.trigger_rule import TriggerRule
 
 
 def _print_weekday(execution_date, **context):
@@ -59,6 +60,7 @@ with dag:
 
     final_task = DummyOperator(
         task_id='final_task',
+        trigger_rule=TriggerRule.ONE_SUCCESS,
     )
 
     print_weekday >> branching >> email_people >> final_task
