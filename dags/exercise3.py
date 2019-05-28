@@ -52,9 +52,9 @@ with dag:
     email_people = [
         BashOperator(
             bash_command=f'echo Email {name}',
-            task_id=f'email_{name}',
+            task_id=f'email_{name.lower()}',
         )
-        for key, name in weekday_person_to_email.items()
+        for name in set(weekday_person_to_email.values())
     ]
 
     final_task = DummyOperator(
