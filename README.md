@@ -20,3 +20,5 @@ A CI pipeline is included with the project (`cloudbuild.yml`), which defines ste
 8. Under `Build configuration`, select `cloudbuild.yaml` and click Create trigger at the bottom.
 
 Done. The just configured build trigger now watches changes on your repository.
+
+Fork by Scato
