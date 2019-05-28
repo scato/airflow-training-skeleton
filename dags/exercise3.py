@@ -54,7 +54,7 @@ with dag:
             bash_command=f'echo Email {name}',
             task_id=f'email_{name}',
         )
-        for name in weekday_person_to_email
+        for key, name in weekday_person_to_email.items()
     ]
 
     final_task = DummyOperator(
