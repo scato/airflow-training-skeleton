@@ -10,7 +10,7 @@ def _print_weekday(execution_date, **context):
 
 
 def _branching(execution_date, **context):
-    weekday_key = execution_date.format('%w')
+    weekday_key = int(execution_date.format('%w'))
     person = weekday_person_to_email[weekday_key].lower()
 
     return f'email_{person}'
