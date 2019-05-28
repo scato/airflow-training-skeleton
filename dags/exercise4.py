@@ -14,7 +14,7 @@ dag = DAG(
 with dag:
     psql_to_gcs = PostgresToGoogleCloudStorageOperator(
         sql="""
-            SELECT * FROM land_registry_price_paid_uk WHERE transfer_date = :ds
+            SELECT * FROM land_registry_price_paid_uk WHERE transfer_date = %(ds)s
             """,
         parameters={'ds': '{{ ds }}'},
         bucket='europe-west1-training-airfl-097953ee-bucket',
