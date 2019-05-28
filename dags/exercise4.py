@@ -2,7 +2,7 @@ from airflow import DAG
 from airflow.contrib.operators.postgres_to_gcs_operator import PostgresToGoogleCloudStorageOperator
 
 dag = DAG(
-    dag_id='exercise 4',
+    dag_id='exercise4',
 )
 
 with dag:
