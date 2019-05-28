@@ -1,4 +1,4 @@
-import airflow
+import airflow.utils.dates
 from airflow import DAG
 from airflow.operators.bash_operator import BashOperator
 
