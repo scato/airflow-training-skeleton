@@ -1,3 +1,5 @@
+import os.path
+import sys
 from datetime import datetime
 
 import pendulum
@@ -5,6 +7,8 @@ import pytest
 from airflow import DAG
 from airflow.contrib.hooks.gcs_hook import GoogleCloudStorageHook
 from airflow.hooks.http_hook import HttpHook
+
+sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(__file__)))))  # NOQA
 
 from dags.operators.http_to_gcs import HttpToGoogleCloudStorageOperator
 from unittest.mock import patch, ANY

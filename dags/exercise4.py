@@ -1,6 +1,11 @@
+import os.path
+import sys
+
 from airflow import DAG
 import airflow.utils.dates
 from airflow.contrib.operators.postgres_to_gcs_operator import PostgresToGoogleCloudStorageOperator
+
+sys.path.append(os.path.dirname(os.path.dirname(__file__)))  # NOQA
 
 from dags.operators.http_to_gcs import HttpToGoogleCloudStorageOperator
 
