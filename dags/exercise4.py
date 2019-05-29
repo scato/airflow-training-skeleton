@@ -73,7 +73,7 @@ with dag:
     )
 
     dataflow_python = DataFlowPythonOperator(
-        py_file='dataflow_job.py',
+        py_file='gs://europe-west1-training-airfl-097953ee-bucket/dataflow_job.py',
         options={
             'input': 'gs://europe-west1-training-airfl-097953ee-bucket/data/properties/ds={{ ds }}/',
             'table': 'properties',
