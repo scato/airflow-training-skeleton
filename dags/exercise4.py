@@ -82,8 +82,8 @@ with dag:
         dataflow_default_options={
             'project': project_id,
             'region': 'europe-west1',
-            'staging_location': 's://europe-west1-training-airfl-097953ee-bucket/dataflow-staging',
-            'temp_location': 's://europe-west1-training-airfl-097953ee-bucket/dataflow-temp',
+            'staging_location': 'gs://europe-west1-training-airfl-097953ee-bucket/dataflow-staging',
+            'temp_location': 'gs://europe-west1-training-airfl-097953ee-bucket/dataflow-temp',
         },
         task_id='dataflow_python',
     )
