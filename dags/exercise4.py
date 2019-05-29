@@ -69,3 +69,9 @@ with dag:
         zone='europe-west4-a',
         task_id='dataproc_delete_cluster',
     )
+
+    psql_to_gcs >> dataproc_pyspark
+    http_to_gcs >> dataproc_pyspark
+    dataproc_create_cluster >> dataproc_pyspark
+
+    dataproc_pyspark >> dataproc_delete_cluster
