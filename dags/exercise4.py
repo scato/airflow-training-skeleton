@@ -53,9 +53,9 @@ with dag:
     dataproc_pyspark = DataProcPySparkOperator(
         main='gs://europe-west1-training-airfl-097953ee-bucket/build_statistics.py',
         arguments=[
-            'gs://europe-west1-training-airfl-097953ee-bucket/data/properties/',
-            'gs://europe-west1-training-airfl-097953ee-bucket/data/currencies/',
-            'gs://europe-west1-training-airfl-097953ee-bucket/data/statistics/',
+            'gs://europe-west1-training-airfl-097953ee-bucket/data/properties/ds={{ ds }}/',
+            'gs://europe-west1-training-airfl-097953ee-bucket/data/currencies/ds={{ ds }}/',
+            'gs://europe-west1-training-airfl-097953ee-bucket/data/statistics/ds={{ ds }}/',
         ],
         cluster_name='analyse-pricing-{{ ds }}',
         project_id=project_id,
