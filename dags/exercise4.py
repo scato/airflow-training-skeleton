@@ -45,20 +45,20 @@ with dag:
     dataproc_create_cluster = DataprocClusterCreateOperator(
         cluster_name='analyse-pricing-{{ ds }}',
         project_id=project_id,
-        num_workers=2,
         zone='europe-west4-a',
+        num_workers=2,
         task_id='dataproc_create_cluster',
     )
 
     dataproc_pyspark = DataProcPySparkOperator(
-        cluster_name='analyse-pricing-{{ ds }}',
-        project_id=project_id,
-        pyfiles=['other/build_statistics.py'],
+        main='build_statistics.py',
         arguments=[
             'gs://europe-west1-training-airfl-097953ee-bucket/data/properties/',
             'gs://europe-west1-training-airfl-097953ee-bucket/data/currencies/',
             'gs://europe-west1-training-airfl-097953ee-bucket/data/statistics/',
         ],
+        cluster_name='analyse-pricing-{{ ds }}',
+        project_id=project_id,
         zone='europe-west4-a',
         task_id='dataproc_pyspark',
     )
