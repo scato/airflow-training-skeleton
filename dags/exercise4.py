@@ -79,6 +79,8 @@ with dag:
             'table': 'properties',
             'dataset': 'airflowbolcom-may2829-ba473316:dwh',
         },
+        project_id=project_id,
+        zone='europe-west4-a',
         task_id='dataflow_python',
     )
 
@@ -86,6 +88,7 @@ with dag:
         bucket='europe-west1-training-airfl-097953ee-bucket',
         source_objects='/data/statistics/ds={{ ds }}/',
         destination_project_dataset_table='airflowbolcom-may2829-ba473316:dwh.statistics',
+        autodetect=True,
         task_id='gcs_to_bq',
     )
 
