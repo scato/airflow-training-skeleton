@@ -51,7 +51,7 @@ with dag:
     )
 
     dataproc_pyspark = DataProcPySparkOperator(
-        main='build_statistics.py',
+        main='gs://europe-west1-training-airfl-097953ee-bucket/build_statistics.py',
         arguments=[
             'gs://europe-west1-training-airfl-097953ee-bucket/data/properties/',
             'gs://europe-west1-training-airfl-097953ee-bucket/data/currencies/',
