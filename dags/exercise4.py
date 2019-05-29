@@ -97,6 +97,7 @@ with dag:
         source_format='PARQUET',
         create_disposition='CREATE_IF_NEEDED',
         write_disposition='WRITE_TRUNCATE',
+        autodetect=True,
         google_cloud_storage_conn_id='google_cloud_storage_default',
         bigquery_conn_id='bigquery_default',
         task_id='gcs_to_bq',
