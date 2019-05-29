@@ -6,8 +6,8 @@ from airflow.models import BaseOperator
 from airflow.utils.decorators import apply_defaults
 
 
-class HttpToGcsOperator(BaseOperator):
-    template_fields = ('endpoint',)
+class HttpToGoogleCloudStorageOperator(BaseOperator):
+    template_fields = ('endpoint', 'filename')
 
     @apply_defaults
     def __init__(self,
