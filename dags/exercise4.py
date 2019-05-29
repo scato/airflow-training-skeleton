@@ -81,16 +81,24 @@ with dag:
         },
         dataflow_default_options={
             'project': project_id,
-            'zone': 'europe-west4-a',
+            'region': 'europe-west1',
+            'staging_location': 's://europe-west1-training-airfl-097953ee-bucket/dataflow-staging',
+            'temp_location': 's://europe-west1-training-airfl-097953ee-bucket/dataflow-temp',
         },
         task_id='dataflow_python',
     )
 
     gcs_to_bq = GoogleCloudStorageToBigQueryOperator(
         bucket='europe-west1-training-airfl-097953ee-bucket',
-        source_objects='/data/statistics/ds={{ ds }}/',
+        source_objects=[
+            '/data/statistics/ds={{ ds }}/part-*'
+        ],
         destination_project_dataset_table='airflowbolcom-may2829-ba473316:dwh.statistics',
-        autodetect=True,
+        source_format='PARQUET',
+        create_disposition='CREATE_IF_NEEDED',
+        write_disposition='WRITE_TRUNCATE',
+        google_cloud_storage_conn_id='google_cloud_storage_default',
+        bigquery_conn_id='bigquery_default',
         task_id='gcs_to_bq',
     )
 
