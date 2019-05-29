@@ -3,6 +3,8 @@ import sys
 
 from airflow import DAG
 import airflow.utils.dates
+from airflow.contrib.operators.gcs_to_bq import GoogleCloudStorageToBigQueryOperator
+from airflow.contrib.operators.dataflow_operator import DataFlowPythonOperator
 from airflow.contrib.operators.dataproc_operator \
     import DataprocClusterCreateOperator, DataProcPySparkOperator, DataprocClusterDeleteOperator
 from airflow.contrib.operators.postgres_to_gcs_operator import PostgresToGoogleCloudStorageOperator
@@ -70,8 +72,28 @@ with dag:
         task_id='dataproc_delete_cluster',
     )
 
+    dataflow_python = DataFlowPythonOperator(
+        py_file='dataflow_job.py',
+        options={
+            'input': 'gs://europe-west1-training-airfl-097953ee-bucket/data/properties/ds={{ ds }}/',
+            'table': 'properties',
+            'dataset': 'airflowbolcom-may2829-ba473316:dwh',
+        },
+        task_id='dataflow_python',
+    )
+
+    gcs_to_bq = GoogleCloudStorageToBigQueryOperator(
+        bucket='europe-west1-training-airfl-097953ee-bucket',
+        source_objects='/data/statistics/ds={{ ds }}/',
+        destination_project_dataset_table='airflowbolcom-may2829-ba473316:dwh.statistics',
+        task_id='gcs_to_bq',
+    )
+
+    psql_to_gcs >> dataflow_python
+
     psql_to_gcs >> dataproc_pyspark
     http_to_gcs >> dataproc_pyspark
     dataproc_create_cluster >> dataproc_pyspark
 
+    dataproc_pyspark >> gcs_to_bq
     dataproc_pyspark >> dataproc_delete_cluster
