@@ -77,7 +77,7 @@ with dag:
         options={
             'input': 'gs://europe-west1-training-airfl-097953ee-bucket/data/properties/ds={{ ds }}/',
             'table': 'properties',
-            'dataset': 'airflowbolcom-may2829-ba473316:dwh',
+            'dataset': 'airflowbolcom-may2829-ba473316.dwh',
         },
         dataflow_default_options={
             'project': project_id,
@@ -93,7 +93,7 @@ with dag:
         source_objects=[
             '/data/statistics/ds={{ ds }}/part-*'
         ],
-        destination_project_dataset_table='airflowbolcom-may2829-ba473316:dwh.statistics',
+        destination_project_dataset_table='airflowbolcom-may2829-ba473316.dwh.statistics',
         source_format='PARQUET',
         create_disposition='CREATE_IF_NEEDED',
         write_disposition='WRITE_TRUNCATE',
