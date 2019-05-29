@@ -79,8 +79,10 @@ with dag:
             'table': 'properties',
             'dataset': 'airflowbolcom-may2829-ba473316:dwh',
         },
-        project_id=project_id,
-        zone='europe-west4-a',
+        dataflow_default_options={
+            'project': project_id,
+            'zone': 'europe-west4-a',
+        },
         task_id='dataflow_python',
     )
 
